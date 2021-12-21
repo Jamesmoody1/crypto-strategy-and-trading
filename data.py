@@ -6,13 +6,25 @@ import pandas as pd
 import numpy as np
 import mplfinance as mpf
 from matplotlib import pyplot as plt
+import plotly.graph_objs as go
 # from mpl_finance import candlestick2_ohlc
 
 class StrategyTest:
-    def __init__(self):
+    def __init__(self) -> None:
+
+        ''' Initialises an instance of the StrategyTest class. 
+        
+        Arguments
+        -----
+        None
+        
+        Returns
+        ----- 
+        None '''
+
         # startDate, endDate, as per our convenience we can modify
         self.startDate = datetime.datetime(2021, 12, 1) 
-        self.endDate = datetime.datetime(2021, 12, 5)
+        self.endDate = datetime.datetime(2021, 12, 13)
         self.candleinterval = "15m"
 
     def get_data(self):
@@ -22,7 +34,7 @@ class StrategyTest:
     def plot_data(self, data):
         mpf.plot(data, type='candle', mav=(10, 20, 50), volume=True)
 
-    def initiate_sma(self, period, df) -> DataFrame:
+    def generate_sma(self, period, df) -> DataFrame:
 
         ''' Takes in a period and returns a Series of values for the simple
         moving average for the specified period. 
@@ -62,16 +74,6 @@ class StrategyTest:
 
         return df
 
-        ''' If I want to make this function faster:
-        
-            - Try keeping a list of values the length of the
-              period. Everytime you move up to the next value
-              to calculate, add the new value and drop the 
-              oldest one. 
-              
-            This should save some time as I don't need to 
-            constantly grab and regrab numbers I have previously
-            used. '''
 
 pd.set_option("display.min_rows", 60)
 datatest = StrategyTest()
@@ -80,9 +82,9 @@ df = pd.DataFrame(data)
 df['Index'] = [x+1 for x in range(len(df))]
 df['Datetime'] = df.index
 df.set_index('Index', inplace=True)
-df = datatest.initiate_sma(10, df)
-df = datatest.initiate_sma(20, df)
-df = datatest.initiate_sma(100, df)
+df = datatest.generate_sma(10, df)
+df = datatest.generate_sma(20, df)
+df = datatest.generate_sma(100, df)
 data_2 = df.set_index('Datetime')
 plt.plot(data_2['10 SMA'], label='10 SMA')
 plt.plot(data_2['20 SMA'], label='20 SMA')
@@ -90,3 +92,22 @@ plt.plot(data_2['100 SMA'], label='100 SMA')
 plt.legend()
 df.head(60)
 # datatest.plot_data(data)
+# trace_1 = go.Candlestick(
+#     x=df['Datetime'], open=df['Open'], high=df['High'],
+#     low=df['Low'], close=df['Close']
+# )
+# trace_2 = go.Line(
+#     x=df['Datetime'], y=df['10 SMA']
+# )
+# trace_3 = go.Line(
+#     x=df['Datetime'], y=df['20 SMA']
+# )
+# trace_4 = go.Line(
+#     x=df['Datetime'], y=df['100 SMA']
+# )
+# chart_data = [trace_1, trace_2, trace_3, trace_4]
+# fig = go.Figure(data=chart_data)
+# fig.update_layout(xaxis_rangeslider_visible=False)
+# fig.update_traces(marker_line_color=['#1CFFCE', '#F1CEBB', '#444444'], selector=dict(type='line'))
+# fig.show()
+# %%
