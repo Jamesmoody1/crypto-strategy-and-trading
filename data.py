@@ -97,6 +97,7 @@ if __name__ == "__main__":
     plt.plot(data_2['20 SMA'], label='20 SMA')
     plt.plot(data_2['100 SMA'], label='100 SMA')
     plt.legend()
+    plt.show(block=True)
     # ------------------------------------------
     # This code is for different plotting using plotly.graph_objs
     ''' datatest.plot_data(data)
