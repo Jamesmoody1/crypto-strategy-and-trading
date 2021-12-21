@@ -73,25 +73,26 @@ class DataCollector:
 
         return df
 
+# Create an instance of the class and grab initial data.
+datatest = DataCollector()
+data = datatest.get_data()
+df = pd.DataFrame(data)
+# Create an Index column for the DataFrame for easier looping.
+df['Index'] = [x+1 for x in range(len(df))]
+# Create a Datetime column from the initial df index.
+df['Datetime'] = df.index
+# Make the Index column the index of the DataFrame.
+df.set_index('Index', inplace=True)
+# Generate some SMAs.
+df = datatest.generate_sma(10, df)
+df = datatest.generate_sma(20, df)
+df = datatest.generate_sma(100, df)
+# Create a second DataFrame with Datetime as the index column.
+data_2 = df.set_index('Datetime')
+
 if __name__ == "__main__":
 
     pd.set_option("display.min_rows", 60)
-    # Create an instance of the class and grab initial data.
-    datatest = DataCollector()
-    data = datatest.get_data()
-    df = pd.DataFrame(data)
-    # Create an Index column for the DataFrame for easier looping.
-    df['Index'] = [x+1 for x in range(len(df))]
-    # Create a Datetime column from the initial df index.
-    df['Datetime'] = df.index
-    # Make the Index column the index of the DataFrame.
-    df.set_index('Index', inplace=True)
-    # Generate some SMAs.
-    df = datatest.generate_sma(10, df)
-    df = datatest.generate_sma(20, df)
-    df = datatest.generate_sma(100, df)
-    # Create a second DataFrame with Datetime as the index column.
-    data_2 = df.set_index('Datetime')
     # Plot graph of SMAs.
     plt.plot(data_2['10 SMA'], label='10 SMA')
     plt.plot(data_2['20 SMA'], label='20 SMA')
