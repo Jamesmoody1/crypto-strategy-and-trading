@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 import plotly.graph_objs as go
 # from mpl_finance import candlestick2_ohlc
 
-class StrategyTest:
+class DataCollector:
     def __init__(self) -> None:
 
         ''' Initialises an instance of the StrategyTest class. 
