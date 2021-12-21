@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     pd.set_option("display.min_rows", 60)
     # Create an instance of the class and grab initial data.
-    datatest = StrategyTest()
+    datatest = DataCollector()
     data = datatest.get_data()
     df = pd.DataFrame(data)
     # Create an Index column for the DataFrame for easier looping.
