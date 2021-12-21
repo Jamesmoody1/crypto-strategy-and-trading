@@ -82,6 +82,8 @@ if __name__ == "__main__":
     df = pd.DataFrame(data)
     # Create an Index column for the DataFrame for easier looping.
     df['Index'] = [x+1 for x in range(len(df))]
+    # Create a Datetime column from the initial df index.
+    df['Datetime'] = df.index
     # Make the Index column the index of the DataFrame.
     df.set_index('Index', inplace=True)
     # Generate some SMAs.
