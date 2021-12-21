@@ -1,4 +1,3 @@
-# %%
 from pandas.core.frame import DataFrame
 import yfinance as yahooFinance 
 import datetime
@@ -74,40 +73,46 @@ class StrategyTest:
 
         return df
 
+if __name__ == "__main__":
 
-pd.set_option("display.min_rows", 60)
-datatest = StrategyTest()
-data = datatest.get_data()
-df = pd.DataFrame(data)
-df['Index'] = [x+1 for x in range(len(df))]
-df['Datetime'] = df.index
-df.set_index('Index', inplace=True)
-df = datatest.generate_sma(10, df)
-df = datatest.generate_sma(20, df)
-df = datatest.generate_sma(100, df)
-data_2 = df.set_index('Datetime')
-plt.plot(data_2['10 SMA'], label='10 SMA')
-plt.plot(data_2['20 SMA'], label='20 SMA')
-plt.plot(data_2['100 SMA'], label='100 SMA')
-plt.legend()
-df.head(60)
-# datatest.plot_data(data)
-# trace_1 = go.Candlestick(
-#     x=df['Datetime'], open=df['Open'], high=df['High'],
-#     low=df['Low'], close=df['Close']
-# )
-# trace_2 = go.Line(
-#     x=df['Datetime'], y=df['10 SMA']
-# )
-# trace_3 = go.Line(
-#     x=df['Datetime'], y=df['20 SMA']
-# )
-# trace_4 = go.Line(
-#     x=df['Datetime'], y=df['100 SMA']
-# )
-# chart_data = [trace_1, trace_2, trace_3, trace_4]
-# fig = go.Figure(data=chart_data)
-# fig.update_layout(xaxis_rangeslider_visible=False)
-# fig.update_traces(marker_line_color=['#1CFFCE', '#F1CEBB', '#444444'], selector=dict(type='line'))
-# fig.show()
-# %%
+    pd.set_option("display.min_rows", 60)
+    # Create an instance of the class and grab initial data.
+    datatest = StrategyTest()
+    data = datatest.get_data()
+    df = pd.DataFrame(data)
+    # Create an Index column for the DataFrame for easier looping.
+    df['Index'] = [x+1 for x in range(len(df))]
+    # Make the Index column the index of the DataFrame.
+    df.set_index('Index', inplace=True)
+    # Generate some SMAs.
+    df = datatest.generate_sma(10, df)
+    df = datatest.generate_sma(20, df)
+    df = datatest.generate_sma(100, df)
+    # Create a second DataFrame with Datetime as the index column.
+    data_2 = df.set_index('Datetime')
+    # Plot graph of SMAs.
+    plt.plot(data_2['10 SMA'], label='10 SMA')
+    plt.plot(data_2['20 SMA'], label='20 SMA')
+    plt.plot(data_2['100 SMA'], label='100 SMA')
+    plt.legend()
+    # ------------------------------------------
+    # This code is for different plotting using plotly.graph_objs
+    ''' datatest.plot_data(data)
+    trace_1 = go.Candlestick(
+        x=df['Datetime'], open=df['Open'], high=df['High'],
+        low=df['Low'], close=df['Close']
+    )
+    trace_2 = go.Line(
+        x=df['Datetime'], y=df['10 SMA']
+    )
+    trace_3 = go.Line(
+        x=df['Datetime'], y=df['20 SMA']
+    )
+    trace_4 = go.Line(
+        x=df['Datetime'], y=df['100 SMA']
+    )
+    chart_data = [trace_1, trace_2, trace_3, trace_4]
+    fig = go.Figure(data=chart_data)
+    fig.update_layout(xaxis_rangeslider_visible=False)
+    fig.update_traces(marker_line_color=['#1CFFCE', '#F1CEBB', '#444444'], selector=dict(type='line'))
+    fig.show() '''
