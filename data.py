@@ -88,15 +88,15 @@ df = datatest.generate_sma(10, df)
 df = datatest.generate_sma(20, df)
 df = datatest.generate_sma(100, df)
 # Create a second DataFrame with Datetime as the index column.
-data_2 = df.set_index('Datetime')
+df_2 = df.set_index('Datetime')
 
 if __name__ == "__main__":
 
     pd.set_option("display.min_rows", 60)
     # Plot graph of SMAs.
-    plt.plot(data_2['10 SMA'], label='10 SMA')
-    plt.plot(data_2['20 SMA'], label='20 SMA')
-    plt.plot(data_2['100 SMA'], label='100 SMA')
+    plt.plot(df_2['10 SMA'], label='10 SMA')
+    plt.plot(df_2['20 SMA'], label='20 SMA')
+    plt.plot(df_2['100 SMA'], label='100 SMA')
     plt.legend()
     plt.show(block=True)
     # ------------------------------------------
