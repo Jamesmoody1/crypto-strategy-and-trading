@@ -22,9 +22,9 @@ class DataCollector:
         None '''
 
         # startDate, endDate, as per our convenience we can modify
-        self.startDate = datetime.datetime(2021, 12, 1) 
-        self.endDate = datetime.datetime(2021, 12, 13)
-        self.candleinterval = "15m"
+        self.startDate = datetime.datetime(2020, 11, 1) 
+        self.endDate = datetime.datetime(2021, 12, 21)
+        self.candleinterval = "1h"
 
     def get_data(self):
         btc_usd = yahooFinance.Ticker("BTC-USD")
