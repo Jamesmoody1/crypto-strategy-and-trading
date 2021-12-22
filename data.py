@@ -99,6 +99,8 @@ if __name__ == "__main__":
     plt.plot(df_2['100 SMA'], label='100 SMA')
     plt.legend()
     plt.show(block=True)
+    df_2
+
     # ------------------------------------------
     # This code is for different plotting using plotly.graph_objs
     ''' datatest.plot_data(data)
@@ -120,3 +122,5 @@ if __name__ == "__main__":
     fig.update_layout(xaxis_rangeslider_visible=False)
     fig.update_traces(marker_line_color=['#1CFFCE', '#F1CEBB', '#444444'], selector=dict(type='line'))
     fig.show() '''
+
+# %%
