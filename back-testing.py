@@ -81,3 +81,5 @@ if __name__ == "__main__":
     print(f'Win percentage was: {(no_of_winners / trades_made) * 100 :.2f}%. This does not show much as there was no defined SL/TPs')
     print(f'Total PnL was {balance - 200000 :.2f}. ')
     print(f'Final Balance is {balance :.2f}... ')
+
+    # Machine learning to learn best swing low/high SL placement!
